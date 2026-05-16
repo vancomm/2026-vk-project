@@ -1,0 +1,23 @@
+{
+  "name": "image-enhancer",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "postinstall": "node scripts/copy-wasm.js"
+  },
+  "devDependencies": {
+    "terser": "^5.47.1",
+    "typescript": "~6.0.2",
+    "vite": "^8.0.12"
+  },
+  "dependencies": {
+    "@types/heic-decode": "^2.0.0",
+    "heic-decode": "^2.1.0",
+    "heic2any": "^0.0.4",
+    "onnxruntime-web": "^1.26.0"
+  }
+}

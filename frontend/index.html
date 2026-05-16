@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML Image Enhancer Demo</title>
+    <link rel="stylesheet" href="/src/styles.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <header>
+            <h1>ML-Улучшение изображений в реальном времени</h1>
+            <p>Нейросетевой анализ экспозиции и WebGL-рендеринг до 15 Мпк</p>
+        </header>
+
+        <main>
+            <section class="upload-zone" id="dropZone">
+                <input type="file" id="fileInput" accept=".jpg,.jpeg,.png,.bmp,.heic" hidden>
+                <div class="upload-prompt">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12" />
+                    </svg>
+                    <p>Перетащите изображение сюда или <span>выберите файл</span></p>
+                    <small>Поддерживаются JPG, PNG, BMP, HEIC (до 15 Мпк)</small>
+                </div>
+            </section>
+
+            <section class="progress-card hidden" id="progressCard">
+                <div class="progress-header">
+                    <span id="statusLabel">Статус: Инициализация...</span>
+                    <button id="cancelBtn" class="btn-danger">Отмена</button>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill" id="barFill" style="width: 0%"></div>
+                </div>
+                <span id="percentageLabel">0%</span>
+            </section>
+
+            <section class="viewer-zone hidden" id="viewerZone">
+                <div class="comparison-slider" id="sliderContainer">
+                    <img id="imgBefore" class="image-layer" alt="До">
+                    <div class="resize-layer" id="resizeLayer">
+                        <img id="imgAfter" class="image-layer" alt="После">
+                    </div>
+                    <div class="slider-handle" id="sliderHandle"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+</body>
+
+</html>

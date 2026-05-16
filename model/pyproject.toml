@@ -1,0 +1,13 @@
+[project]
+name = "model"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "huggingface-hub>=1.15.0",
+    "onnx>=1.21.0",
+    "onnxruntime>=1.26.0",
+    "onnxscript>=0.7.0",
+    "torch>=2.12.0",
+]
