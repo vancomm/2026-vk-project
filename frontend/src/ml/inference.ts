@@ -2,19 +2,12 @@ import * as ort from 'onnxruntime-web';
 import type { ZeroDCEParameters } from '../types/index.ts';
 
 const model = 'zero_dce.onnx';
-const baseUrl = typeof self !== 'undefined' && self.location ? self.location.origin : '';
 
-const globalOrt = ort as any;
-if (!globalOrt.env) {
-    globalOrt.env = {};
-}
-if (!globalOrt.env.wasm) {
-    globalOrt.env.wasm = {};
-}
+const origin = typeof self !== 'undefined' && self.location ? self.location.origin : '';
+const base = import.meta.env.BASE_URL;
 
-globalOrt.env.wasm.wasmPaths = baseUrl + '/models/';
-
-globalOrt.env.wasm.numThreads = Math.max(1, Math.min(4, navigator.hardwareConcurrency || 2));
+ort.env.wasm.wasmPaths = `${origin}${base}models/`.replace(/([^:]\/)\/+/g, "$1");
+ort.env.wasm.numThreads = Math.max(1, Math.min(4, navigator.hardwareConcurrency || 2));
 
 let inferenceSessionCache: ort.InferenceSession | null = null;
 
@@ -33,7 +26,7 @@ async function getSession(signal: AbortSignal): Promise<ort.InferenceSession> {
             graphOptimizationLevel: 'all'
         };
 
-        inferenceSessionCache = await ort.InferenceSession.create(`/models/${model}`, sessionOptions);
+        inferenceSessionCache = await ort.InferenceSession.create(`${base}models/${model}`, sessionOptions);
         return inferenceSessionCache;
     } catch (error: any) {
         throw new Error(`Не удалось загрузить нейросеть ONNX: ${error?.message || error}`);

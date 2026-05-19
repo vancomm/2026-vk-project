@@ -2,7 +2,13 @@
 
 ![](ml.png)
 
-```
+## Try it out
+
+https://vancommdot.com/vk
+
+## Start locally
+
+```sh
 # bundle ML model
 cd model
 uv sync

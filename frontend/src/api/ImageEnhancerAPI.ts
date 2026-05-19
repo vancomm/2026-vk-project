@@ -1,4 +1,5 @@
 import type { TaskProgress, WorkerMessage, ClientMessage } from '../types/index.ts';
+import EnhancerWorker from '../worker/enhancer.worker.ts?worker'
 
 export class ImageEnhancerAPI {
     private worker: Worker;
@@ -12,11 +13,7 @@ export class ImageEnhancerAPI {
     private conversionResolvers: Map<string, { resolve: (blob: Blob) => void; reject: (err: Error) => void }> = new Map();
 
     constructor() {
-        this.worker = new Worker(
-            new URL('../worker/enhancer.worker.ts', import.meta.url),
-            { type: 'module' }
-        );
-
+        this.worker = new EnhancerWorker();
         this.worker.onmessage = this.handleWorkerMessage.bind(this);
     }
 
